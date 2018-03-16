@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Smoke suite">
+    <test name="Smoke" enabled="true" preserve-order="true">
+        <!--<groups>-->
+            <!--<run>-->
+                <!--<include name="convert_currencies"/>-->
+                <!--<include name="selecting_currencies"/>-->
+                <!--<include name="clear_converter_tabs"/>-->
+                <!--<include name="find_currencies"/>-->
+
+                <!--<exclude name="failure_currencies_tests"/>-->
+            <!--</run>-->
+        <!--</groups>-->
+        <classes>
+            <class name="com.exness.testcases.publicarea.tools.ConverterCurrenciesTest"/>
+            <class name="com.exness.testcases.publicarea.tools.SampleFailureExampleTest"/>
+        </classes>
+    </test>
+</suite>
+

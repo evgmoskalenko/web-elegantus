@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.evgmoskalenko</groupId>
+    <artifactId>web-elegantus</artifactId>
+    <url>web-elegantus.evgmoskalenko.com</url>
+    <version>1.0</version>
+
+    <name>${project.artifactId}</name>
+    <description>Web Elegantus. UI Automation framework.</description>
+
+    <developers>
+        <developer>
+            <id>evgmoskalenko</id>
+            <name>Evgeniy Moskalenko</name>
+            <email>evg@evgmoskalenko.com</email>
+            <organization>evgmoskalenko</organization>
+            <organizationUrl>http://evgmoskalenko.com/</organizationUrl>
+            <roles>
+                <role>qa developer</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <properties>
+        <!--Selenide properties-->
+        <browser>chrome</browser>
+        <selenide.baseUrl>https://www.exness.com</selenide.baseUrl>
+        <selenide.browser-size>1920x1080x24</selenide.browser-size>
+
+        <!-- Selenoid properties capabilities-->
+        <capabilities.enableVNC>true</capabilities.enableVNC>
+        <capabilities.enableVideo>true</capabilities.enableVideo>
+
+        <!--Common properties-->
+        <env>prod</env>
+        <suite>${suiteFile}</suite>
+        <threadCount>5</threadCount>
+        <remoteStatus>true</remoteStatus>
+
+        <!-- Configuration -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <!-- Dependencies Versions -->
+        <java.version>1.8</java.version>
+        <selenide.version>4.10</selenide.version>
+        <testng.version>6.14.2</testng.version>
+        <allure.version>2.0-BETA22</allure.version>
+        <allure-rest-assured.version>2.0-BETA22</allure-rest-assured.version>
+        <log4j.version>1.2.17</log4j.version>
+        <owner-properties.version>1.0.6</owner-properties.version>
+        <restassured.version>3.0.7</restassured.version>
+        <test-data-supplier.version>1.5.0</test-data-supplier.version>
+        <assertj-core.version>3.9.1</assertj-core.version>
+        <findbugs.version>3.0.1</findbugs.version>
+        <commons-collections.version>3.2.1</commons-collections.version>
+
+        <!-- Plugin Versions -->
+        <compiler.plugin.version>3.6.0</compiler.plugin.version>
+        <surefire.plugin.version>2.20.1</surefire.plugin.version>
+        <aspectj.version>1.8.10</aspectj.version>
+
+        <!-- Directory Properties -->
+        <resource-main.directory>${project.basedir}/src/main/resources</resource-main.directory>
+        <resource-test.directory>${project.basedir}/src/test/resources</resource-test.directory>
+        <allure-results.directory>${project.build.directory}/allure-results</allure-results.directory>
+
+        <!-- Management System Properties -->
+        <tms>https://jira.domain.com:8080/browse/{}</tms>
+        <issues.tracker>https://jira.domain.com:8080/browse/{}</issues.tracker>
+    </properties>
+
+    <dependencies>
+        <!-- Selenide -->
+        <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>selenide</artifactId>
+            <version>${selenide.version}</version>
+        </dependency>
+
+        <!-- TestNG -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
+        </dependency>
+
+        <!-- Allure -->
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>${allure.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-rest-assured</artifactId>
+            <version>${allure-rest-assured.version}</version>
+        </dependency>
+
+        <!-- Logger -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+
+        <!-- Properties-->
+        <dependency>
+            <groupId>org.aeonbits.owner</groupId>
+            <artifactId>owner-java8</artifactId>
+            <version>${owner-properties.version}</version>
+        </dependency>
+
+        <!-- Rest api-->
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>${restassured.version}</version>
+        </dependency>
+
+        <!-- Test data supplier-->
+        <dependency>
+            <groupId>io.github.sskorol</groupId>
+            <artifactId>test-data-supplier</artifactId>
+            <version>${test-data-supplier.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj-core.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>findbugs</artifactId>
+            <version>${findbugs.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>${commons-collections.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>${project.name}-${project.version}</finalName>
+        <resources>
+            <resource>
+                <directory>${resource-test.directory}</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${compiler.plugin.version}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefire.plugin.version}</version>
+                <configuration>
+                    <testFailureIgnore>true</testFailureIgnore>
+                    <detail>true</detail>
+                    <systemPropertyVariables>
+                        <browser>${browser}</browser>
+                        <selenide.baseUrl>${selenide.baseUrl}</selenide.baseUrl>
+                        <selenide.browser-size>${selenide.browser-size}</selenide.browser-size>
+                        <capabilities.enableVNC>${capabilities.enableVNC}</capabilities.enableVNC>
+                        <capabilities.enableVideo>${capabilities.enableVideo}</capabilities.enableVideo>
+                        <env>${env}</env>
+                        <suite>${suite}</suite>
+                        <threadCount>${threadCount}</threadCount>
+                    </systemPropertyVariables>
+                    <properties>
+                        <property>
+                            <name>usedefaultlisteners</name>
+                            <value>false</value>
+                        </property>
+                    </properties>
+                    <systemProperties>
+                        <property>
+                            <name>allure.results.directory</name>
+                            <value>${allure-results.directory}</value>
+                        </property>
+                        <property>
+                            <name>allure.link.issue.pattern</name>
+                            <value>${issues.tracker}</value>
+                        </property>
+                        <property>
+                            <name>allure.link.tms.pattern</name>
+                            <value>${tms}</value>
+                        </property>
+                    </systemProperties>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>
+                            ${project.basedir}/suites/${suiteFile}.xml
+                        </suiteXmlFile>
+                    </suiteXmlFiles>
+                    <argLine>
+                         -javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar
+                    </argLine>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>2.9</version>
+                <configuration>
+                    <reportVersion>2.6.0</reportVersion>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>smoke</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <suiteFile>smoke</suiteFile>
+            </properties>
+        </profile>
+    </profiles>
+
+</project>

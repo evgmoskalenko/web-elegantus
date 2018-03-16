@@ -1,0 +1,10 @@
+.idea/
+.allure/
+libs/*
+target/*
+build/*
+allure-results/*
+web-elegantus.iml
+*.iml
+*.log
+.DS_Store
